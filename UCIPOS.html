@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIP Posgrados | Plan de Vida Profesional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        bgBase: '#000000',
+                        panel: '#0A0A0A',
+                        panelHover: '#111111',
+                        goldAccent: '#D4AF37',
+                        cyan: '#00F0FF'
+                    },
+                    animation: {
+                        'latido': 'latido 1.5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        latido: {
+                            '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 30px rgba(212,175,55,0.3)' },
+                            '50%': { transform: 'scale(1.05)', boxShadow: '0 0 60px rgba(212,175,55,0.7)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script>
+        let nivelActual = 'MAESTRÍA';
+
+        function changeView(viewId) {
+            try {
+                // Ocultar todas las vistas
+                const views = document.querySelectorAll('.app-view');
+                for (let i = 0; i < views.length; i++) {
+                    views[i].classList.remove('active');
+                }
+                // Mostrar la vista solicitada
+                const target = document.getElementById(viewId);
+                if (target) {
+                    target.classList.add('active');
+                    window.scrollTo(0, 0); // Código 100% compatible con todos los celulares
+                }
+            } catch(e) {
+                console.error("Error al cambiar vista:", e);
+            }
+        }
+
+        // BASE DE DATOS COMPLETA CON DATOS REALES (NO PALABRAS HUECAS)
+        const db = {
+            'alta-direccion': { 
+                tipo: 'MAESTRÍA', title: "Alta Dirección", duration: "1 Año y 8 Meses", rvoe: "20231444", 
+                desc: "Diseñada para forjar directivos, gerentes y emprendedores capaces de tomar decisiones de alto impacto.", 
+                market: "Según el IMCO, egresados de posgrados en negocios y administración alcanzan promedios salariales de $45,000 a $70,000 MXN, un 68% más que con solo licenciatura. Sin este grado, el techo de cristal directivo es casi imposible de romper en corporativos.", 
+                plan: [
+                    { cuatri: "1° Cuatrimestre", materias: ["Estrategia corporativa", "Dirección y liderazgo", "Economía empresarial"] },
+                    { cuatri: "2° Cuatrimestre", materias: ["Recursos humanos por competencias", "Derecho corporativo", "Contabilidad y finanzas"] },
+                    { cuatri: "3° Cuatrimestre", materias: ["Análisis e interpretación de información financiera", "Marketing empresarial", "Estadística aplicada a los negocios"] },
+                    { cuatri: "4° Cuatrimestre", materias: ["Gestión de la innovación y desarrollo tecnológico", "Responsabilidad social corporativa", "Inteligencia empresarial"] },
+                    { cuatri: "5° Cuatrimestre", materias: ["Coaching", "Proyectos de inversión", "Seminario de tesis"] }
+                ]
+            },
+            'ed-especial': { 
+                tipo: 'MAESTRÍA', title: "Educación Especial", duration: "1 Año y 8 Meses", rvoe: "20231445", 
+                desc: "Estrategias inclusivas y herramientas pedagógicas avanzadas para la atención a la diversidad y transformación de aulas.", 
+                market: "Las normativas de la SEP y el sector privado exigen inclusión obligatoria. Docentes con posgrado en educación especial reportan un incremento directo del 40% en su tabulador base y tienen prioridad en la asignación de plazas de coordinación.", 
+                plan: [
+                    { cuatri: "1° Cuatrimestre", materias: ["Bases de la Educación Especial", "Psicología del Desarrollo Cognitivo", "Marco Legal Inclusivo"] },
+                    { cuatri: "2° Cuatrimestre", materias: ["Trastornos del Neurodesarrollo", "Estrategias de Inclusión Educativa", "Diagnóstico Psicopedagógico"] },
+                    { cuatri: "3° Cuatrimestre", materias: ["Diseño Curricular Adaptado", "Trastornos del Lenguaje y Comunicación", "Tecnologías Aplicadas a la Inclusión"] },
+                    { cuatri: "4° Cuatrimestre", materias: ["Intervención en Discapacidad Intelectual", "Intervención Motriz y Sensorial", "Orientación y Trabajo Familiar"] },
+                    { cuatri: "5° Cuatrimestre", materias: ["Diseño de Proyectos de Inclusión", "Ética Profesional Docente", "Seminario de Investigación"] }
+                ] 
+            },
+            'neurociencias': { 
+                tipo: 'MAESTRÍA', title: "Enseñanza Basada en Neurociencias", duration: "1 Año y 8 Meses", rvoe: "20242338", 
+                desc: "Comprenda el funcionamiento cerebral para diseñar metodologías de aprendizaje científicamente comprobadas y altamente efectivas.", 
+                market: "Las metodologías tradicionales caducaron. Hoy, los institutos privados de alto rendimiento pagan consultorías en neurodidáctica de $800 a $1,500 MXN por hora. Esta especialidad lo saca de la competencia por plazas tradicionales y lo convierte en un asesor cotizado.", 
+                plan: [
+                    { cuatri: "1° Cuatrimestre", materias: ["Fundamentos de Neuroanatomía", "Psicología Cognitiva Aplicada", "Neurobiología del Aprendizaje"] },
+                    { cuatri: "2° Cuatrimestre", materias: ["Neuroplasticidad y Desarrollo", "Atención, Memoria y Funciones Ejecutivas", "Emociones y Aprendizaje"] },
+                    { cuatri: "3° Cuatrimestre", materias: ["Trastornos del Neurodesarrollo", "Evaluación Neuroeducativa", "Estrategias Neurodidácticas"] },
+                    { cuatri: "4° Cuatrimestre", materias: ["Dificultades Específicas del Aprendizaje", "Diseño de Ambientes de Aprendizaje", "Intervención Psicopedagógica"] },
+                    { cuatri: "5° Cuatrimestre", materias: ["Innovación Educativa basada en Evidencia", "Seminario de Investigación I", "Seminario de Tesis"] }
+                ]
+            },
+            'der-procesal': { 
+                tipo: 'MAESTRÍA', title: "Derecho Procesal", duration: "2 Años (6 Cuatrimestres)", rvoe: "20242333", 
+                desc: "Litigación Oral Familiar, Mercantil y Civil. Conviértase en un abogado imbatible en tribunales dominando la oralidad.", 
+                market: "Con la entrada en vigor del Código Nacional de Procedimientos Civiles y Familiares, la oralidad es obligatoria. Un abogado sin especialización en este sistema perderá a sus clientes ante las nuevas generaciones procesalistas. Los honorarios premium en materia oral parten de $30,000 MXN por juicio.", 
+                plan: [
+                    { cuatri: "1° Cuatrimestre", materias: ["Teoría General del Proceso", "Lógica Jurídica", "Medios Alternativos de Soluciones de Controversias"] },
+                    { cuatri: "2° Cuatrimestre", materias: ["Oralidad Familiar", "Hermenéutica Jurídica", "Jurisprudencia Nacional e Internacional"] },
+                    { cuatri: "3° Cuatrimestre", materias: ["Oralidad Mercantil", "Argumentación Jurídica", "Teoría del Caso"] },
+                    { cuatri: "4° Cuatrimestre", materias: ["Oralidad Civil", "Pensamiento Sistemático y Complejo", "Técnicas de Litigación Oral"] },
+                    { cuatri: "5° Cuatrimestre", materias: ["Metodología de la Investigación Jurídica", "Pedagogía Jurídica", "Litigación Estratégica"] },
+                    { cuatri: "6° Cuatrimestre", materias: ["Seminario de Tesis", "Derechos Humanos", "Clínica de Litigación Oral"] }
+                ]
+            },
+            'der-familiar': { 
+                tipo: 'MAESTRÍA', title: "Derecho Familiar y DDHH", duration: "1 Año y 8 Meses", rvoe: "20262285", 
+                desc: "Especialización jurídica integral en la protección de la familia contemporánea y defensa constitucional.", 
+                market: "El 65% de la carga judicial en México pertenece a juzgados familiares. Contar con perspectiva en Derechos Humanos ya no es un plus, es una exigencia obligatoria de la SCJN para llevar divorcios, custodias o alimentos. Esta maestría se paga sola
